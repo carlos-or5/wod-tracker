@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WOD Tracker
 
-## Getting Started
+Una aplicación para registrar y analizar entrenamientos de CrossFit (WOD - Workout of the Day).
 
-First, run the development server:
+## Características
+
+- ✅ Crear WODs con fecha, título y descripción
+- ✅ Gestionar múltiples WODs por día
+- ✅ Ver detalles de cada WOD
+- ✅ Estadísticas de ejercicios
+- ✅ Base de datos PostgreSQL (Neon)
+
+## Requisitos
+
+- Node.js 18+
+- npm
+- PostgreSQL database (Neon recomendado)
+
+## Instalación
+
+```bash
+npm install
+```
+
+## Configuración
+
+Crear archivo `.env.local`:
+
+```
+DATABASE_URL=postgresql://user:password@host/dbname
+```
+
+## Desarrollo
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Scripts Disponibles
 
-To learn more about Next.js, take a look at the following resources:
+- `npm run dev` - Servidor de desarrollo
+- `npm run build` - Build de producción
+- `npm start` - Inicia servidor de producción
+- `npm run lint` - Linting
+- `npm run migrate:db` - Ejecutar migraciones de BD
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Stack Tecnológico
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Frontend**: Next.js 16.2.4, React 19, TypeScript 5
+- **Styling**: Tailwind CSS 3.4
+- **Database**: PostgreSQL via Neon
+- **Framework**: App Router (Next.js 16)
 
-## Deploy on Vercel
+## Estructura
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+app/              - Next.js app directory
+  api/           - API routes
+  components/    - React components
+  page.tsx       - Home page
+  create/        - Create WOD page
+  wod/[id]/      - WOD detail page
+  stats/         - Statistics page
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+src/
+  lib/           - Utilities (db.ts)
+  services/      - Business logic (wod.service.ts)
+
+db/               - Database scripts (schema.sql)
+```
+
+## API Routes
+
+- `GET /` - Home (lista de WODs)
+- `GET /create` - Página de crear WOD
+- `GET /wod/[id]` - Detalles del WOD
+- `GET /stats` - Estadísticas
+- `POST /api/wod/create` - Crear nuevo WOD
+- `POST /api/wod/confirm-analysis` - Confirmar análisis de WOD
+- `GET /api/wod/[id]` - Obtener WOD con detalles
+- `GET /api/stats/exercises` - Estadísticas de ejercicios
+
